@@ -1,0 +1,90 @@
+\bin\command.com: pct.exe
+	tm	start
+
+sein.obj: sein.c
+	cc -c -d sein.c
+
+sexmit.obj: sexmit.c
+	cc -c -d sexmit.c
+
+secomm.obj: secomm.c
+	cc -c -d secomm.c
+
+seform.obj: seform.c
+	cc -c -d seform.c
+
+seemsg.obj: seemsg.c
+	cc -c -d seemsg.c
+
+sehelp.obj: sehelp.c
+	cc -c -d sehelp.c
+
+secrt.obj: secrt.c
+	cc -c -d secrt.c
+
+sekbin.obj: sekbin.c
+	cc -c -d sekbin.c
+
+setix.obj: setix.c
+	cc -c -d setix.c
+
+seinsr.obj: seinsr.c
+	cc -c -d seinsr.c
+
+seut.obj: seut.c
+	cc -c -d seut.c
+
+pcsio.obj: pcsio.asm
+	cc -c -d pcsio.asm
+
+pcsio2.obj: pcsio2.asm
+	cc -c -d pcsio2.asm
+
+sefdef.obj: sefdef.c
+	cc -c -d sefdef.c
+
+seexec.obj: seexec.c
+	cc -c -d seexec.c
+
+sepre.obj: sepre.c
+	cc -c -d sepre.c
+
+pre.obj: pre.asm
+	cc -c -d pre.asm
+
+seinit.obj: seinit.c
+	cc -c -d seinit.c 
+
+semgst.obj: semgst.c
+	cc -c -d semgst.c
+
+sedscp.obj: sedscp.c
+	cc -c -d sedscp.c
+
+dscp.obj: dscp.asm
+	cc -c -d dscp.asm
+
+trs.obj:  trs.asm
+	cc -c -d trs.asm
+
+setime.obj: setime.c
+	cc -c -d -v setime.c
+
+sefmtb.obj: sefmtb.c
+	cc -c -d sefmtb.c
+
+seoff.obj: seoff.c
+	cc -c -d seoff.c
+
+seccrd.obj: seccrd.c
+	cc -c -d seccrd.c
+
+pct.exe: sein.obj secomm.obj seemsg.obj secrt.obj seut.obj \ 
+	seexec.obj sefdef.obj sepre.obj seinit.obj sexmit.obj makefile \
+	seform.obj setix.obj sekbin.obj	sedscp.obj dscp.obj setime.obj \
+	pre.obj pcsio2.obj seinsr.obj semgst.obj sehelp.obj \
+	sefmtb.obj trs.obj seoff.obj tpct.arf seccrd.obj pcsio2.obj
+	tm stop
+	tlink @tpct.arf
+	tm stop
+	beep /f880 /d4
