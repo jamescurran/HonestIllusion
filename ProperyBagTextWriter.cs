@@ -1,4 +1,4 @@
-﻿
+
 #region License
 // Copyright (c) 2009, James M. Curran
 // 
