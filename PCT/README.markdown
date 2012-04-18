@@ -2,7 +2,7 @@
 
 I recently was going through some very old 5 1/4" floppies, and discovered these.  They are the source code to my very first significant C program, Ticketron's PCT (Personal Computer Terminal)
 
-The dates on the file range from 25-Feb-1978 to 11-Jan-1988.
+The dates on the file range from 25-Feb-1987 to 11-Jan-1988.
 
 The program is based on (and replaces) on dedicated embedded system written in assembler, to sell tickets on the Ticketron network.
 
