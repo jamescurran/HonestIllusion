@@ -380,7 +380,7 @@ namespace NovelTheory.Component
 			var files = new HashSet<string>();
 			var bundles = BundleTable.Bundles;
 //			BundleTable.Bundles.Clear();
-			IBundleTransform transform = ttype == transformType.Compress ? new CssMinify() : new NoTransform("text/stylesheet") as IBundleTransform;
+			IBundleTransform transform = ttype == transformType.Compress ? new CssMinify() : new NoTransform("text/css") as IBundleTransform;
 			var vpath = CombineUrlPath(LocalCssPath, "cssx");
 			var bundle = new Bundle(vpath, transform);
 			foreach (var lib in Segments.stdFiles)
@@ -475,6 +475,7 @@ namespace NovelTheory.Component
 			if (!file.StartsWith("http://"))
 				file = Path.Combine(LocalJsPath, file).Replace('\\', '/');
 
+			file = VirtualPathUtility.ToAbsolute(file);
 			sb.WriteLine(@"<script type=""text/javascript"" src=""{0}""></script>", file);
 		}
 
@@ -507,6 +508,7 @@ namespace NovelTheory.Component
 		{
 			if (!file.StartsWith("http://"))
 				file = Path.Combine(LocalCssPath, file).Replace('\\', '/');
+			file = VirtualPathUtility.ToAbsolute(file);
 
 			tw.WriteLine(@"<link rel=""stylesheet"" type=""text/css"" href=""{0}"" />", file);
 		}

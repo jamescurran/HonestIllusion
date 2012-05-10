@@ -4,7 +4,7 @@
 			preferredLibrary="jquery"  cdn="google" localjspath="~/Scripts" 
 		   selfJsPath="~/Scripts/Views/"
 		   useDebugScripts="true" 
-		   transform="compress"   
+		   transform="bundleonly"   
 		   >
 	<library name="base" useGoogle="false" dependsOn="jquery" />
 
