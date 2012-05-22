@@ -50,6 +50,8 @@ namespace NovelTheory.Component
 		private const string detailskeyword = @"jslibrariesDetails";
 		private const string cssskeyword = @"jslibrariesCssDetails";
 
+		private readonly string BundleFile;
+
 		private LibraryDetail[] libraryDefaults = new LibraryDetail[]
 			{
 				new LibraryDetail("prototype"),
@@ -122,7 +124,9 @@ namespace NovelTheory.Component
 			this.cacheProvider = this.httpcontext.Cache;
 			this.Segments = new JSsegments();
 			this.viewPath = (vc.View as RazorView).ViewPath;
-			InsertDependancy("base", 0);
+			var bb = this.viewPath.Split('/', '\\', '.');
+			BundleFile = String.Join("_", bb.Skip(bb.Length - 3).Take(2));
+			Std("base");
 		}
 		#endregion
 
@@ -246,10 +250,11 @@ namespace NovelTheory.Component
 			var files = new HashSet<string>();
 //			BundleTable.Bundles.Clear();
 			IBundleTransform transform = ttype == transformType.Compress ? new JsMinify() : new NoTransform("text/javascript") as IBundleTransform;
-			var vpath = CombineUrlPath(LocalJsPath, "jsx");
+			var vpath = CombineUrlPath(LocalJsPath, BundleFile);
 			var bundle = new Bundle(vpath, transform);
 			BundleTable.Bundles.Add(bundle);
 			int cnt = 0;  //Bundles offer no practical way to know how many file it contains, so we have to count them.
+			int segment = 0;   // bundling is just broken.   Let's try to workaround it.
 
 			LibraryDetail self = null;
 			StringWriter sb = new StringWriter();
@@ -262,11 +267,12 @@ namespace NovelTheory.Component
 					{
 						this.RenderJavascriptFile(sb, BundleTable.Bundles.ResolveBundleUrl(vpath));
 //						BundleTable.Bundles.Clear();
+						vpath = CombineUrlPath(LocalJsPath, BundleFile) + ++segment;
 						bundle = new Bundle(vpath, transform);
 						BundleTable.Bundles.Add(bundle);
 						cnt = 0;
 					}
-					this.RenderJavascriptFile(sb, string.Format("http://ajax.googleapis.com/ajax/libs/{0}/{1}/{0}.js", name, lib.Version));
+					this.RenderJavascriptFile(sb, string.Format(@"http://ajax.googleapis.com/ajax/libs/{0}/{1}/{0}.js", name, lib.Version));
 					continue;
 				}
 
@@ -287,12 +293,15 @@ namespace NovelTheory.Component
 			if (self != null && self.PathName != null)
 			{
 				bundle.AddFile(CombineUrlPath(LocalJsPath, self.PathName));
+				++cnt;
 			}
 			foreach (string file in Segments.files)
 			{
 				bundle.AddFile(file);
+				++cnt;
 			}
-			this.RenderJavascriptFile(sb, BundleTable.Bundles.ResolveBundleUrl(vpath));
+			if (cnt >0)
+				this.RenderJavascriptFile(sb, BundleTable.Bundles.ResolveBundleUrl(vpath));
 
 			if (Segments.segments.Any())
 			{
@@ -318,7 +327,7 @@ namespace NovelTheory.Component
 					string name = lib.Name;
 					if (lib.UseGoogle)
 					{
-						this.RenderJavascriptFile(sb, string.Format("http://ajax.googleapis.com/ajax/libs/{0}/{1}/{0}.js", name, lib.Version));
+						this.RenderJavascriptFile(sb, string.Format(@"http://ajax.googleapis.com/ajax/libs/{0}/{1}/{0}.js", name, lib.Version));
 						continue;
 					}
 
@@ -381,7 +390,7 @@ namespace NovelTheory.Component
 			var bundles = BundleTable.Bundles;
 //			BundleTable.Bundles.Clear();
 			IBundleTransform transform = ttype == transformType.Compress ? new CssMinify() : new NoTransform("text/css") as IBundleTransform;
-			var vpath = CombineUrlPath(LocalCssPath, "cssx");
+			var vpath = CombineUrlPath(LocalCssPath, BundleFile);
 			var bundle = new Bundle(vpath, transform);
 			foreach (var lib in Segments.stdFiles)
 			{
@@ -473,9 +482,10 @@ namespace NovelTheory.Component
 		internal void RenderJavascriptFile(TextWriter sb, string file)
 		{
 			if (!file.StartsWith("http://"))
+			{
 				file = Path.Combine(LocalJsPath, file).Replace('\\', '/');
-
-			file = VirtualPathUtility.ToAbsolute(file);
+				file = VirtualPathUtility.ToAbsolute(file);
+			}
 			sb.WriteLine(@"<script type=""text/javascript"" src=""{0}""></script>", file);
 		}
 

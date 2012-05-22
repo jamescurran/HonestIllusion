@@ -4,11 +4,11 @@
 			preferredLibrary="jquery"  cdn="google" localjspath="~/Scripts" 
 		   selfJsPath="~/Scripts/Views/"
 		   useDebugScripts="true" 
-		   transform="bundleonly"   
+		   transform="compress"   
 		   >
-	<library name="base" useGoogle="false" dependsOn="jquery" />
+	<library name="base" useGoogle="false"  />
 
-	<library name="jquery" version="1.6.2" useGoogle="false" pathname="jquery-1.6.2.min.js" debugPath="jquery-1.6.2.js" />
+	<library name="jquery" version="1.6.2" useGoogle="true"  dependsOn="json" pathname="jquery-1.6.2.min.js" debugPath="jquery-1.6.2.js" />
 	<library name="modernizr" pathname="modernizr-1.7.min.js" debugPath="modernizr-1.7.js" alias="modern, modernizer" dependsOn="jquery"/>
 	<library name="dojo" useGoogle="true" pathname="dojo.js" />
 	<library name="mootools" useGoogle="true" pathname="mootools.js" />
