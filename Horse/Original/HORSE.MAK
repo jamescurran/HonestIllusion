@@ -1,0 +1,99 @@
+# Microsoft Visual C++ generated build script - Do not modify
+
+PROJ = HORSE
+DEBUG = 0
+PROGTYPE = 0
+CALLER = 
+ARGS = 
+DLLS = 
+D_RCDEFINES = -d_DEBUG
+R_RCDEFINES = -dNDEBUG
+ORIGIN = MSVC
+ORIGIN_VER = 1.00
+PROJPATH = E:\WORKING\HORSE\
+USEMFC = 0
+CC = cl
+CPP = cl
+CXX = cl
+CCREATEPCHFLAG = 
+CPPCREATEPCHFLAG = 
+CUSEPCHFLAG = 
+CPPUSEPCHFLAG = 
+FIRSTC = HORSE.C     
+FIRSTCPP =             
+RC = rc
+CFLAGS_D_WEXE = /nologo /G2 /W3 /Zi /AM /Od /D "_DEBUG" /FR /GA /Fd"HORSE.PDB"
+CFLAGS_R_WEXE = /nologo /W3 /O1 /D "NDEBUG" /FR /GA 
+LFLAGS_D_WEXE = /NOLOGO /NOD /PACKC:61440 /STACK:10240 /ALIGN:16 /ONERROR:NOEXE /CO  
+LFLAGS_R_WEXE = /NOLOGO /NOD /PACKC:61440 /FARCALL /STACK:5120 /ALIGN:16 /ONERROR:NOEXE 
+LIBS_D_WEXE = oldnames libw mlibcew commdlg.lib olecli.lib olesvr.lib shell.lib 
+LIBS_R_WEXE = oldnames libw slibcew 
+RCFLAGS = /nologo
+RESFLAGS = /nologo
+RUNFLAGS = 
+DEFFILE = HORSE.DEF
+OBJS_EXT = 
+LIBS_EXT = 
+!if "$(DEBUG)" == "1"
+CFLAGS = $(CFLAGS_D_WEXE)
+LFLAGS = $(LFLAGS_D_WEXE)
+LIBS = $(LIBS_D_WEXE)
+MAPFILE = nul
+RCDEFINES = $(D_RCDEFINES)
+!else
+CFLAGS = $(CFLAGS_R_WEXE)
+LFLAGS = $(LFLAGS_R_WEXE)
+LIBS = $(LIBS_R_WEXE)
+MAPFILE = nul
+RCDEFINES = $(R_RCDEFINES)
+!endif
+!if [if exist MSVC.BND del MSVC.BND]
+!endif
+SBRS = HORSE.SBR
+
+
+HORSE_DEP = e:\working\horse\horse.h \
+	e:\working\horse\horsedat.h
+
+
+HORSE_RCDEP = e:\working\horse\horse.h
+
+
+all:	$(PROJ).EXE $(PROJ).BSC
+
+HORSE.OBJ:	HORSE.C $(HORSE_DEP)
+	$(CC) $(CFLAGS) $(CCREATEPCHFLAG) /c HORSE.C
+
+HORSE.RES:	HORSE.RC $(HORSE_RCDEP)
+	$(RC) $(RCFLAGS) $(RCDEFINES) -r HORSE.RC
+
+
+$(PROJ).EXE::	HORSE.RES
+
+$(PROJ).EXE::	HORSE.OBJ $(OBJS_EXT) $(DEFFILE)
+	echo >NUL @<<$(PROJ).CRF
+HORSE.OBJ +
+$(OBJS_EXT)
+$(PROJ).EXE
+$(MAPFILE)
+I:\MSVC\LIB\+
+I:\MSVC\MFC\LIB\+
+D:\LIB\+
+$(LIBS)
+$(DEFFILE);
+<<
+	link $(LFLAGS) @$(PROJ).CRF
+	$(RC) $(RESFLAGS) HORSE.RES $@
+	@copy $(PROJ).CRF MSVC.BND
+
+$(PROJ).EXE::	HORSE.RES
+	if not exist MSVC.BND 	$(RC) $(RESFLAGS) HORSE.RES $@
+
+run: $(PROJ).EXE
+	$(PROJ) $(RUNFLAGS)
+
+
+$(PROJ).BSC: $(SBRS)
+	bscmake @<<
+/o$@ $(SBRS)
+<<

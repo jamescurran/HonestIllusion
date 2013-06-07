@@ -1,0 +1,33 @@
+# Standard Windows make file.  The utility MAKE.EXE compares the
+# creation date of the file to the left of the colon with the file(s)
+# to the right of the colon.  If the file(s) on the right are newer
+# then the file on the left, Make will execute all of the command lines
+# following this line that are indented by at least one tab or space.
+# Any valid MS-DOS command line may be used.
+
+copt=/W3 -Gws -Owsler -Zpe
+lopt=/AL:256 /M/LI
+
+# Update the resource if necessary
+
+Horse.res: Horse.rc Horse.h 
+	rc -r Horse.rc
+
+# Update the object file if necessary
+
+Horse.obj: Horse.c Horse.h horsedat.h
+	cl $(copt) -c Horse.c
+
+# Update the executable file if necessary, and if so, add the resource back in.
+# The /NOE must be included when linking with Windows libraries.
+
+Horse.exe: Horse.obj Horse.def
+	link Horse jcsprtf1, ,/NOD, slibcew libw/NOE $(lopt), Horse.def
+	rc -v -k Horse.res
+
+# If the .res file is new and the .exe file is not, update the resource.
+# Note that the .rc file can be updated without having to either 
+# compile or link the file.
+
+Horse.exe: Horse.res
+	rc -v -k Horse.res

@@ -1,0 +1,11 @@
+[MSVC Status File]
+Version=1.00
+ProjectType=10
+External=1
+DebugBuildCmd=NMAKE /f HORSE
+ReleaseBuildCmd=NMAKE /f HORSE
+RebuildOption=/a
+BuildMode=1
+TargetName=E:\WORKING\HORSE\HORSE.EXE
+BrkptCount=0
+WatchCount=0

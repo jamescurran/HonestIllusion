@@ -1,0 +1,24 @@
+;module-definition file for generic -- used by link.exe
+
+NAME	Horse	   ; application's module name
+
+DESCRIPTION 'Galloping Horse, by James M. Curran'
+
+STUB	'WINSTUB.EXE'	; Generates error message if application
+			; is run without Windows
+
+CODE	MOVEABLE DISCARDABLE PRELOAD	; code can be moved in memory
+
+;DATA must be MULTIPLE if program can be invoked more than once
+
+DATA	MOVEABLE MULTIPLE
+
+HEAPSIZE  96
+STACKSIZE 5120  ; recommended minimum for Windows applications
+
+; All functions that will be called by any Windows routine
+; MUST be exported.
+
+EXETYPE WINDOWS
+EXPORTS
+	HorseWndProc   @1  ; name of window processing function
