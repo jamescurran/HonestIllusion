@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="fonts/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        th { text-align:center;}
+        .glyphicon-certificate { color:red; font-size:x-large;}
+        td {
+            min-width:30px; 
+            min-height:30px;
+        }
+    </style>
+</head>
+<body>
+    <h1></h1>
+
+    <table border="1">
+        <tbody>
+            <tr>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td>&nbsp;</td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td>&nbsp;</td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+            </tr>
+            <tr>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td>&nbsp;</td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td>&nbsp;</td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+            </tr>
+            <tr>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td>&nbsp;</td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td>&nbsp;</td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+            </tr>
+            <tr>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td>&nbsp;</td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td>&nbsp;</td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+                <td><i class="glyphicon glyphicon-certificate" /></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th />
+                <th />
+                <th />
+                <th />
+                <th />
+                <th />
+                <th />
+                <th />
+            </tr>
+        </tfoot>
+
+
+    </table>
+    <input type="checkbox" id="chkShow" checked="checked"/> Show Digits.
+
+
+</body>
+    <script src="jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+
+        var showTime = true;
+        //OnTick();
+        $(function ($) {
+            setInterval(OnTick, 1000);
+            $("#chkShow").on("change", function () {
+                if (showTime)
+                {
+                    showTime = false;
+                    $("table tfoot tr th").each(function (inx, elm)
+                        { $(elm).text(""); });
+                    }
+                else
+                    showTime = true;
+            });
+        });
+
+        function OnTick() {
+            var tim = new Date().toTimeString().substr(0, 8);
+            if (showTime) {
+                $("table tfoot tr th").each(function (inx, elm)
+                { $(elm).text(tim.substr(inx, 1)); });
+            }
+
+            $("table tbody tr").each(function (row, elm) {
+                $("td", elm).each(function (col, td) {
+                    var c = tim.substr(col, 1);
+                    if (c == ':') return;
+
+                    var $td = $(td).find("i");
+                    var bit = Math.pow(2, 3 - row);
+                    if (c & bit)
+                        $td.addClass("glyphicon-certificate");
+                    else
+                        $td.removeClass("glyphicon-certificate");
+                });
+            });
+        }
+
+    </script>
+</html>
