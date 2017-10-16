@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+    <style>
+        body {
+            font-family: 'Aclonica';font-size: 22px; background-color:darkseagreen;
+        }
+        .B {
+            font-weight: bold;
+            font-size: 40px;
+            color: burlywood;
+            padding: 7px 10px 7px 10px;
+        }
+        .highlight { color: Black;}
+        .row {
+            padding: 8px 10px 8px 10px;
+        }
+    </style>
+</head>
+<body>
+    
+<div class="row">
+    <span id="it" class="B">It</span>
+    <span id="is" class="B">Is</span>
+    <span id="half" class="B">Half</span>
+    <span id="tenm" class="B">Ten</span>
+</div>
+    <div class="row">
+        <span id="quarter" class="B">Quarter</span>
+        <span id="twenty" class="B">Twenty</span>
+    </div>
+    <div class="row">
+        <span id="fivem" class="B">Five</span>
+        <span id="minutes" class="B">Minutes</span>
+        <span id="to" class="B">To</span>
+    </div>
+    <div class="row">
+        <span id="past" class="B">Past</span>
+        <span id="H1" class="B">Two</span>
+        <span id="H2" class="B">Three</span>
+    </div>
+    <div class="row">
+        <span id="H0" class="B">One</span>
+        <span id="H3" class="B">Four</span>
+        <span id="H4" class="B">Five</span>
+    </div>
+    <div class="row">
+        <span id="H5" class="B">Six</span>
+        <span id="H6" class="B">Seven</span>
+        <span id="H7" class="B">Eight</span>
+    </div>
+    <div class="row">
+        <span id="H8" class="B">Nine</span>
+        <span id="H9" class="B">Ten</span>
+        <span id="H10" class="B">Eleven</span>
+    </div>
+    <div class="row">
+        <span id="H11" class="B">Twelve</span>
+        <span id="oclock" class="B">O'Clock</span>
+    </div>
+
+</body>
+<script src="jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+    $(function($) {
+        setInterval(OnTick, 60 * 1000);
+        OnTick();
+    });
+
+
+    function OnTick() {
+        var parts = ["it", "is", "oclock"];
+
+        var tim = new Date().toTimeString().substr(0, 5);
+        var hours = tim.substr(0, 2);
+        --hours;
+        var mins = tim.substr(3, 2);
+        if (mins > 30) {
+            ++hours;
+            mins = 60 - mins;
+            parts.push("to");
+        } else
+            parts.push("past");
+
+        hours = hours % 12;
+        parts.push("H" + hours);
+
+        if (mins < 3);
+        else if (mins < 8) {
+            parts.push("fivem");
+            parts.push("minutes");
+        } else if (mins < 13) {
+            parts.push("tenm");
+            parts.push("minutes");
+        } else if (mins < 18)
+            parts.push("quarter");
+        else if (mins < 23) {
+            parts.push("twenty");
+            parts.push("minutes");
+        } else if (mins < 28) {
+            parts.push("fivem");
+            parts.push("twenty");
+            parts.push("minutes");
+        } else
+            parts.push("half");
+
+        $(".B").removeClass("highlight");
+
+        parts.forEach(function(p) { $("#" + p).addClass("highlight"); });
+
+    }
+
+</script>
+</html>
