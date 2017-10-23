@@ -33,6 +33,12 @@ Response ResponseList::GetResponse(string pl)
 		return(resp);
 }
 
+void ResponseList::AddDirect(string board)
+{
+	Response startR = Response(board, board, ++nextID);
+	lst.push_back(startR);
+}
+
 
 Response ResponseList::GetResponse(int id)
 {

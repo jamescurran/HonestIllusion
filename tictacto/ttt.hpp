@@ -116,6 +116,7 @@ class ResponseList
 
 public:
 	Response GetResponse(string pl);
+	void AddDirect(string board);
 	Response GetResponse(int id);
 	std::list<Response>::iterator	begin() {return lst.begin();}
 	std::list<Response>::iterator	end()   {return lst.end();}

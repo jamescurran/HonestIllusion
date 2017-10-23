@@ -37,7 +37,7 @@ using	std::string;
 using	std::cout;
 using	std::cin;
 using	std::endl;
-using	std::basic_ofstream<char,struct std::char_traits<char> >;
+//using	std::basic_ofstream<char,struct std::char_traits<char> >;
 using	std::ofstream;
 
 const char	XXXXX = 'X';
