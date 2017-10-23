@@ -109,6 +109,16 @@
     <ClInclude Include="ttt.hpp" />
     <ClInclude Include="TTTGrid.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Html\b.gif" />
+    <Image Include="Html\h.gif" />
+    <Image Include="Html\o.gif" />
+    <Image Include="Html\v.gif" />
+    <Image Include="Html\x.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Html\ttt.css" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

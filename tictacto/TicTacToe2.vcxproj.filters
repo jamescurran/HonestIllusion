@@ -42,4 +42,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Html\b.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Html\h.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Html\o.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Html\v.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Html\x.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Html\ttt.css" />
+  </ItemGroup>
 </Project>

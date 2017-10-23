@@ -1,0 +1,19 @@
+﻿img {
+    border: 0;
+}
+
+.box {
+    width: 40px;
+    height: 40px;
+    background-image: url("b.gif")
+}
+
+.vt {
+    width: 13px;
+    height: 40px;
+}
+
+.hz {
+    width: 172px;
+    height: 12px;
+}
