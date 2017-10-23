@@ -1,3 +1,7 @@
 bin
 
 obj
+/tictacto/html
+/tictacto/.vs
+/tictacto/Release/TicTacToe2.tlog
+/tictacto/vc141.idb
