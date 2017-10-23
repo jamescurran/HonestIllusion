@@ -158,7 +158,7 @@ string GenerateFinalPage(Response R)
 	line = GetHREFfromID(0, R.CmprMove[3]);
 	html+= line + LF;
 
-	html+= "<br/<img src=\"h.gif\" class=\"hz\"><br/>" +LF;
+	html+= "<br/><img src=\"h.gif\" class=\"hz\"><br/>" +LF;
 
 	line = GetHREFfromID(0, R.CmprMove[4]);
 	html+= line + LF;
