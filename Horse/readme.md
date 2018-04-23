@@ -6,4 +6,4 @@ Here you can following the 20 year  development of a simple desktop decoration f
 
 Full story on my blog:
 
-[http://honestillusion.com/blog/2007/02/15/the-tale-of-the-trotting-horse/](http://honestillusion.com/blog/2007/02/15/the-tale-of-the-trotting-horse/)
+[https://honestillusion.com/2007/02/15/the-tale-of-the-trotting-horse.html]https://honestillusion.com/2007/02/15/the-tale-of-the-trotting-horse.html)
