@@ -12,8 +12,19 @@ namespace SOLIDBuzzFuzz
 	{
 		internal class Substitution
 		{
-			public int Digit { get; set; }
-			public string Word { get; set; }
+			public Substitution(int digit, string word)
+			{
+				Digit = digit;
+				Word = word;
+				_testChar = (Digit < 10) ? (char)(Digit+'0') : '_';
+
+			}
+			public int Digit { get; private set; }
+			public string Word { get; private set; }
+
+			private char _testChar;
+			public bool SayIt(int num, string text)=> (num%Digit)==0 || text.Contains(_testChar);
+
 		}
 
 		#region Private fields
@@ -28,8 +39,8 @@ namespace SOLIDBuzzFuzz
 		public BuzzFuzz(int start)
 		{
 			_start = start;
-			_substitutions.Add(new Substitution {Digit = 5, Word = "Buzz"});
-			_substitutions.Add(new Substitution {Digit = 7, Word = "Fuzz"});
+			_substitutions.Add(new Substitution(digit: 5, word: "Buzz" ));
+			_substitutions.Add(new Substitution ( digit: 7, word: "Fuzz" ));
 			Reset();
 		}
 
@@ -48,8 +59,7 @@ namespace SOLIDBuzzFuzz
 			var sb = new StringBuilder();
 			foreach (var sub in _substitutions)
 			{
-				if ((_num%sub.Digit == 0) ||
-				    (sub.Digit < 10 && Current.Contains(sub.Digit.ToString(CultureInfo.InvariantCulture))))
+				if (sub.SayIt(_num, Current))
 				{
 					sb.Append(sub.Word);
 					showWord = true;
